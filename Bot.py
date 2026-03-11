@@ -1,8 +1,13 @@
 import discord
 from discord.ext import commands
 import random
+import os
 
-TOKEN = "MTQ4MDE3OTUyNjQ4MjAwMjA5Nw.GPGFhp.yKN15dwBuX_acGnfUzng8wISalcTJWt0tacx34"
+TOKEN = os.environ['TOKEN']
+
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix="!", intents=intents)
+
 CREATE_CHANNEL_ID = 1480181212080246844
 
 intents = discord.Intents.all()
@@ -246,4 +251,5 @@ async def users(ctx):
     await ctx.send(f"📊 Usuarios: {len(channel.members)}")
 
 
-bot.run("MTQ4MDE3OTUyNjQ4MjAwMjA5Nw.GPGFhp.yKN15dwBuX_acGnfUzng8wISalcTJWt0tacx34")
+
+bot.run(TOKEN)
