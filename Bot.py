@@ -8,7 +8,7 @@ TOKEN = os.environ['TOKEN']
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-CREATE_CHANNEL_ID = 1480181212080246844
+CREATE_CHANNEL_ID = None
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
@@ -242,7 +242,18 @@ async def name(ctx, *, name):
 
     await ctx.send("✏ Nombre cambiado")
 
+@bot.command()
+@commands.has_permissions(administrator=True)
+async def setcreate(ctx):
+    global CREATE_CHANNEL_ID
+    
+    if not ctx.author.voice:
+        await ctx.send("❌ Debes estar en un canal de voz")
+        return
 
+    CREATE_CHANNEL_ID = ctx.author.voice.channel.id
+
+    await ctx.send(f"✅ Canal creador configurado: {ctx.author.voice.channel.name}")
 @bot.command()
 async def users(ctx):
 
@@ -253,3 +264,4 @@ async def users(ctx):
 
 
 bot.run(TOKEN)
+
